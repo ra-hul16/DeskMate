@@ -193,9 +193,6 @@ import tkinter as tk
 from tkinter import messagebox
 
 def to_do_list():
-    
-
-def open_to_do_list():
     # Create a new window for the To-Do List
     to_do_window = tk.Toplevel()
     to_do_window.title("To-Do List")
