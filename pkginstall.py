@@ -1,7 +1,6 @@
 import webbrowser
 import tkinter as tk
 from tkinter import messagebox
-from googlesearch import search  # Import Google search module
 
 # Dictionary of common software packages and their official download pages
 PACKAGE_URLS = {
@@ -23,7 +22,7 @@ PACKAGE_URLS = {
 }
 
 def open_package_website():
-    """Redirects user to the official download page of the package, or the top Google result if not found."""
+    """Redirects user to the official download page of the package."""
     package_name = entry.get().strip().lower()  # Get user input
     
     if not package_name:
@@ -35,17 +34,10 @@ def open_package_website():
         messagebox.showinfo("Redirecting", f"Opening {package_name} download page...")
         webbrowser.open(url)
     else:
-        # If package is not found, fetch the first result from Google
-        messagebox.showinfo("Searching", f"Package '{package_name}' not found. Searching for the best result...")
-        
-        try:
-            search_query = f"{package_name} download"
-            top_result = next(search(search_query, num=1, stop=1, pause=2))  # Get the first Google result
-            messagebox.showinfo("Redirecting", f"Opening top result: {top_result}")
-            webbrowser.open(top_result)
-        except Exception as e:
-            messagebox.showerror("Error", f"Could not fetch search results. Please try again manually.\nError: {e}")
-            webbrowser.open(f"https://www.google.com/search?q={package_name}+download")  # Open Google search page as fallback
+        # If package is not found, search on Google
+        messagebox.showinfo("Searching", f"Package '{package_name}' not found. Searching on Google...")
+        search_url = f"https://www.google.com/search?q={package_name}+download"
+        webbrowser.open(search_url)
 
 # Create GUI window
 root = tk.Tk()
